@@ -47,7 +47,9 @@ main(List<String> args) async {
       await File("purpur.jar").writeAsString("Dry run by the dev branch. Not the real downloaded jar file.", mode: FileMode.write);
     } else {
       var response = await get(Uri.parse("$PURPUR_API/$minecraftVersion/$buildNumber/download"));
-      await File("purpur.jar").writeAsBytes(response.bodyBytes, mode: FileMode.write);
+      if (response.statusCode == 200)
+        await File("purpur.jar").writeAsBytes(response.bodyBytes, mode: FileMode.write);
+      else continue;
     }
     var tags = ["$minecraftVersion-$buildNumber", "$minecraftVersion"];
     if (minecraftVersion == minecraftVersions.last) {

@@ -1,0 +1,25 @@
+name: On push
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - uses: dart-lang/setup-dart@v1
+      - name: Install dart dependencies
+        run: dart pub get
+      - name: Update Docker Images
+        run: dart update_docker_images.dart force

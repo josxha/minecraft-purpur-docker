@@ -107,7 +107,7 @@ Future<void> dockerBuildPushRemove(List<String> tags) async {
 
 Future<int> getLatestBuildForVersion(minecraftVersion) async {
   var response = await get(Uri.parse("$PURPUR_API/$minecraftVersion"));
-  return jsonDecode(response.body)["builds"]["latest"] as int;
+  return int.parse(jsonDecode(response.body)["builds"]["latest"]);
 }
 
 Future<List<String>> getDockerImageTags() async {

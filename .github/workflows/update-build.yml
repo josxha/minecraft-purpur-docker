@@ -1,4 +1,4 @@
-name: Update Paper Build
+name: Update Purpur Build
 
 on:
   schedule:

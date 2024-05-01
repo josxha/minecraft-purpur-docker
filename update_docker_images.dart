@@ -120,6 +120,7 @@ Future<List<String>> getDockerImageTags() async {
     print(uri);
     var response = await get(uri);
     Map<String, dynamic> json = jsonDecode(response.body);
+    if (json["results"] == null) break;
     List jsonList = json["results"];
     tags.addAll(jsonList.map((listElement) => listElement["name"] as String).toList());
     if (json['next'] == null)

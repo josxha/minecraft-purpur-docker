@@ -1,4 +1,4 @@
-FROM josxha/zulu-openjdk:jre-21
+FROM eclipse-temurin:21-jre
 
 LABEL org.opencontainers.image.source="https://github.com/josxha/minecraft-purpur-docker" \
       org.opencontainers.image.authors="https://github.com/josxha" \
